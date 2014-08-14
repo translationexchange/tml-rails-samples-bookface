@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <ul class="nav nav-sidebar">
+        <li class="nav-header">Favorites</li>
+        <li><%= link_to("Newsfeed") %></li>
+        <li><%= link_to("Messages") %></li>
+        <li><%= link_to("Photos") %></li>
+        <li><%= link_to("Events") %></li>
+        <li class="nav-header">Friends</li>
+        <li><%= link_to("Close Friends") %></li>
+        <li><%= link_to("Family") %></li>
+        <li><%= link_to("Coworkers") %></li>
+      </ul>
+    </div>
+    <div class="col-sm-7">
+
+      <%= form_tag do %>
+        <div class="form-group">
+          <label><strong>
+            Update Status
+          </strong></label>
+          <input type="email" class="form-control" placeholder="What's on your mind">
+        </div>
+      <% end %>
+
+      <hr>
+
+      <% @stories.each do |story| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <% if story[:photo] %>
+              <%=image_tag("#{story[:photo]}.jpg", style: "width:60px") %>
+            <% else %>
+              <div class="media-object media-img"></div>
+            <% end %>
+          </a>
+          <div class="media-body">
+            <div><small class="text-muted">
+              <%= story[:date].strftime %>
+            </small></div>
+
+            <%= story[:title].html_safe %>
+
+            <div class="media-actions">
+              <a href="#"><strong>Like</strong></a> |
+              <a href="#"><strong>Comment</strong></a>
+            </div>
+            <div class="media">
+              <div class="media-body media-reply">
+                <input type="text" class="form-control" placeholder="Write a reply">
+                <small>Press enter to post</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <div class="col-sm-3">
+      <br>
+      <div>
+        <strong><a href="">3 Upcoming Birthdays</a></strong>
+      </div>
+      <div class="well friends">
+        <h6>Find Friends</h6>
+        <input class="form-control" placeholder="Enter an email address" />
+      </div>
+    </div>
+  </div>
+
+  <br><br><br><br><br>
+
+</div> <!-- /container -->
+

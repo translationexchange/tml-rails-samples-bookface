@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <ul class="nav nav-sidebar">
+        <li class="nav-header"><%= tr("Favorites") %></li>
+        <li><%= link_to(tr("Newsfeed")) %></li>
+        <li><%= link_to(tr("Messages")) %></li>
+        <li><%= link_to(tr("Photos")) %></li>
+        <li><%= link_to(tr("Events")) %></li>
+        <li class="nav-header"><%= tr("Friends") %></li>
+        <li><%= link_to(tr("Close Friends")) %></li>
+        <li><%= link_to(tr("Family")) %></li>
+        <li><%= link_to(tr("Coworkers")) %></li>
+      </ul>
+    </div>
+    <div class="col-sm-7">
+
+      <%= form_tag do %>
+        <div class="form-group">
+          <label><strong>
+            <%= tr("Update Status") %>
+          </strong></label>
+          <input type="email" class="form-control" placeholder="<%= trl("What's on your mind")%>">
+        </div>
+      <% end %>
+
+      <hr>
+
+      <% @stories.each do |story| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <% if story[:photo] %>
+              <%=image_tag("#{story[:photo]}.jpg", style: "width:60px") %>
+            <% else %>
+              <div class="media-object media-img"></div>
+            <% end %>
+          </a>
+          <div class="media-body">
+            <div><small class="text-muted">
+              <%= story[:date].tr(:verbose).html_safe %>
+            </small></div>
+
+            <%= tr(story[:title], story[:tokens]) %>
+
+            <div class="media-actions">
+              <a href="#"><strong><%= tr("Like") %></strong></a> |
+              <a href="#"><strong><%= tr("Comment") %></strong></a>
+            </div>
+            <div class="media">
+              <div class="media-body media-reply">
+                <input type="text" class="form-control" placeholder="<%= trl("Write a reply") %>">
+                <small><%= tr("Press enter to post") %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <div class="col-sm-3">
+      <br>
+      <div>
+        <strong><%= link_to(tr("{count|| Upcoming Birthday}", count: 3)) %></a></strong>
+      </div>
+      <div class="well friends">
+        <h6><%= tr("Find Friends") %></h6>
+        <input class="form-control" placeholder="<%= trl("Enter an email address") %>" />
+      </div>
+    </div>
+  </div>
+
+  <br><br><br><br><br>
+
+</div> <!-- /container -->
+
